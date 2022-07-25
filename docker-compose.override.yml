@@ -1,0 +1,13 @@
+version: '5'
+
+services:
+  managingconfigurationnetcore:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - USER_SECRETS_ID=f9ad8295-bd47-4dfa-b6fc-3c003a0260de
+    ports:
+      - "80"
+    volumes:
+      - $APPDATA/Microsoft/UserSecrets/$USER_SECRETS_ID:/root/.microsoft/usersecrets/$USER_SECRETS_ID
+      - $HOME/.microsoft/usersecrets/$USER_SECRETS_ID:/root/.microsoft/usersecrets/$USER_SECRETS_ID
+What I’ve added are essentially 4 lines. I’ve defined an environment variable
