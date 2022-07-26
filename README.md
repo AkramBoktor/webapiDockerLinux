@@ -90,4 +90,27 @@ Now you can use it as a regular configuration, with this difference that it’s 
   # secret.json
   ![image](https://user-images.githubusercontent.com/35446384/180923892-9405ade1-9615-4a99-b5c3-11132c1c8525.png)
 
+ # Secrets in Docker
+Once Microsoft went OpenSource and the hell got frozen, they also started to be open for many external tools like Docker. Microsoft started using Docker for internal projects but also added very good support for it in Visual Studio 2017. But if we run our app in a container, we are loosing an access to the secrets.json stored somewhere on the host machine. Let’s tackle this problem. I’m starting with adding Docker support via VS2017. Again, right-click → Add → Docker support. It’ll ask for a version of container and I’m choosing Linux. Next steps will depend of this decision.
   
+  ![image](https://user-images.githubusercontent.com/35446384/180924015-ae5e5069-c5bd-41e7-86ac-15efa2d24bf4.png)
+
+  Magic is happening now and we have new “project” available. If we have Docker deamon started, we can run the program. The first build might take a while to download all needed images. When the app starts you, your secret configuration value will be empty. Why it’s so? It’s because the app started in sandbox environment on Linux, so it cannot reach the secret value from your usersecrets directory.
+
+What we need to do is mounting a volume with the secret.json. Let’s **open docker-compose.override.yml** and change from this:
+  
+  ![image](https://user-images.githubusercontent.com/35446384/180924144-7f3a83f6-8778-4dda-a6e5-0ababfcc015e.png)
+  
+  What I’ve added are essentially 4 lines. I’ve defined an environment variable with UserSecretsId created in the .csproj (it’s inside the UserSecretsId tag) and I’ve defined volumes: section with two rules. First of them covers a Windows hosting machine and the second one covers Linux and Mac. I didn’t test it on Linux or Mac but should work as well as on Windows OS. Of course having both lines here is redundant, but we should not depend on a single developer machine’s OS in our source code. The alternative to that is just defining another docker-compose file and override the existing one depending on the development machine. Anyway, the principle is the same.
+
+Note: If you’ve chosen Windows container when adding Docker support, you must change destination path to Windows pattern in volumes section.
+
+There are some dedicated NuGet packages which support secrets inside Docker swarm, but I’m not a fan of those. Your source code ought to be tools-agnostic so it shouldn’t know what development tools you’re using, whether it’s Docker, VMs or whatever.
+  
+  #  Csproj for solution
+  ![image](https://user-images.githubusercontent.com/35446384/180924396-acdb7e50-d8bf-45c5-9d43-ccae68a7fd7a.png)
+  
+  ![image](https://user-images.githubusercontent.com/35446384/180924483-c9fafcec-f17d-446b-9be2-99b7f7bf1440.png)
+
+
+
