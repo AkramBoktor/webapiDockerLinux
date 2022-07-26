@@ -1,5 +1,5 @@
 # webapiDockerLinux
-Docker with asp.net core &amp; users secret
+# Docker with asp.net core &amp; users secret
 
 # Managing options and secrets in .NET Core and Docker
 
@@ -33,3 +33,35 @@ Let’s add just two simple files with some service configuration files: **appse
 
 ![image](https://user-images.githubusercontent.com/35446384/180923074-395b084b-9d3f-4d1a-a0c1-8fd5fd77b709.png)
 
+![image](https://user-images.githubusercontent.com/35446384/180923196-3feaf78c-d577-4abc-986c-095768f1ec1e.png)
+
+So far so good! We are ready to use our configuration in the app. The ASP.NET Core gives an ability to register it in the container so we can inject it into other classes. When we use default ASP.NET Core Dependency Container we should configure services in ConfigureServices method in Startup class:
+
+public void ConfigureServices(IServiceCollection services)
+
+![image](https://user-images.githubusercontent.com/35446384/180923263-371d714c-3b5a-4c70-8419-876f230ac268.png)
+
+Then you can inject the confiruration into your classes wrapped in a IOptions<T> class where T is the config class defined a while ago:
+
+![image](https://user-images.githubusercontent.com/35446384/180923302-ae7ed712-f7a5-4ac9-b7b5-e8749cf4b32c.png)
+
+![image](https://user-images.githubusercontent.com/35446384/180923340-c766af9e-065d-42ca-8dd9-169b2b7c0dd6.png)
+
+# Secrets
+There is a temptation to use app settings to all kinds of variable config values, but there are some which should not be saved in the appsettings.json.
+
+DO NOT SAVE IN appsettings.json FOLLOWING SETTINGS:
+
+connection strings
+passwords
+password hashes
+API keys
+tokens
+“Peppers”
+cryptographic keys
+… and other values which are confidential
+Remember that those files are checked in your source code control system and you probably don’t want to share your production passwords with all repository users. What’s more, it might happen that some day your repository will be compromised or you simply go open source. I can bet, that there are tens of confidential data on GitHub or BitBucket public repositories. You don’t want to make this mistake.
+
+.NET Core comes to you with a solution. They developed sort of provider which apart of looking into appsettings.json uses values from some secret.json file which is saved on each developer’s machine locally in the special folder assigned to the project (the folder name is a GUID specific for a project).
+
+So to use them we will use VisualStudio 2017. We will need to install another **NuGet package: Microsoft.Extensions.Configuration.UserSecrets.** Next, let’s use IDE to generate secrets.json in a proper directory. Right-click on the project and choosing “Manage User Secrets” will do the thing.
