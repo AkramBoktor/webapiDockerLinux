@@ -1,4 +1,6 @@
 # webapiDockerLinux
+1 - asp.net core v5
+2 - Docker , Docker Desktop
 # Docker with asp.net core &amp; users secret
 
 # Managing options and secrets in .NET Core and Docker
