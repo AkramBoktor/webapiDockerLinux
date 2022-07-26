@@ -65,3 +65,7 @@ Remember that those files are checked in your source code control system and you
 .NET Core comes to you with a solution. They developed sort of provider which apart of looking into appsettings.json uses values from some secret.json file which is saved on each developer’s machine locally in the special folder assigned to the project (the folder name is a GUID specific for a project).
 
 So to use them we will use VisualStudio 2017. We will need to install another **NuGet package: Microsoft.Extensions.Configuration.UserSecrets.** Next, let’s use IDE to generate secrets.json in a proper directory. Right-click on the project and choosing “Manage User Secrets” will do the thing.
+
+  ![image](https://user-images.githubusercontent.com/35446384/180923480-f579a0ce-11ea-47b3-b5d8-65d60e0b87bc.png)
+
+  
