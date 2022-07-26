@@ -68,4 +68,17 @@ So to use them we will use VisualStudio 2017. We will need to install another **
 
   ![image](https://user-images.githubusercontent.com/35446384/180923480-f579a0ce-11ea-47b3-b5d8-65d60e0b87bc.png)
 
+  A JSON file will open, but nothing will be added into your project. It’s been created in one of the following folders (depending on your OS):
+
+Windows: %APPDATA%\microsoft\UserSecrets\<userSecretsId>\secrets.json
+Linux: ~/.microsoft/usersecrets/<userSecretsId>/secrets.json
+Mac: ~/.microsoft/usersecrets/<userSecretsId>/secrets.json The <userSecretsId> is basically a GUID which can be checked in the .csproj file.
+Let’s setup some configuration here:
+  
+  ![image](https://user-images.githubusercontent.com/35446384/180923567-30cfd7e2-682b-4ca4-bba3-bc84b09ee46f.png)
+
+  The last thing to use it is adding secrets support into our configuration. We will do it only in Development environment, though, since it’s not recommended to use user’s secrets on the production.
+
+![image](https://user-images.githubusercontent.com/35446384/180923724-04289a1f-bc0e-4bc6-a1e9-902003b188b3.png)
+
   
