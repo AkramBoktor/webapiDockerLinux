@@ -83,4 +83,11 @@ Let’s setup some configuration here:
 
 ![image](https://user-images.githubusercontent.com/35446384/180923724-04289a1f-bc0e-4bc6-a1e9-902003b188b3.png)
 
+  The class passed in the generic parameter is any one defined in the assembly which is a result of building project with UserSecretsId defined in it’s csproj file.
+
+Now you can use it as a regular configuration, with this difference that it’s only visible on your machine. Each developer needs to create own secrets.json.
+  
+  # secret.json
+  ![image](https://user-images.githubusercontent.com/35446384/180923892-9405ade1-9615-4a99-b5c3-11132c1c8525.png)
+
   
