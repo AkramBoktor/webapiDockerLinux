@@ -112,5 +112,12 @@ There are some dedicated NuGet packages which support secrets inside Docker swar
   
   ![image](https://user-images.githubusercontent.com/35446384/180924483-c9fafcec-f17d-446b-9be2-99b7f7bf1440.png)
 
+# Create SWARM docker
+https://stackoverflow.com/questions/42139605/how-do-you-manage-secret-values-with-docker-compose-v3-1
+https://www.youtube.com/watch?v=OLSHSkSZLV8
+
+![image](https://user-images.githubusercontent.com/35446384/181248432-2d0d0fa3-4527-496e-96ad-342762fa06e4.png)
+
+![image](https://user-images.githubusercontent.com/35446384/181248468-191b3a2f-eff4-4c55-97aa-9859452fdd15.png)
 
 
